@@ -18,7 +18,7 @@ struct ax_result_ok_t
 struct ax_result_err_t
 {
     /** The number of the error. */
-    int errno;
+    int errnum;
     /** The message of the error. */
     char *message;
 };
@@ -54,7 +54,7 @@ typedef struct ax_result_t *ax_result_p;
 ax_result_p ax_result_ok(void *value);
 
 /** Creates a result of type result. */
-ax_result_p ax_result_err(int errno, char *message);
+ax_result_p ax_result_err(int errnum, char *message);
 
 /** Frees the memory of a RESULT pointer. */
 void *ax_free_result(ax_result_p result);

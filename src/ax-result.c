@@ -16,14 +16,14 @@ extern ax_result_p ax_result_ok(void *value)
     return result;
 }
 
-extern ax_result_p ax_result_err(int errno, char *message)
+extern ax_result_p ax_result_err(int errnum, char *message)
 {
     ax_result_p result = (ax_result_p)malloc(sizeof(ax_result_t));
 
     if (result != NULL)
     {
         result->type = ERR;
-        result->to.err.errno = errno;
+        result->to.err.errnum = errnum;
         result->to.err.message = message;
     }
 

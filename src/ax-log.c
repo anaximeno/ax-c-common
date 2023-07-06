@@ -22,11 +22,8 @@ static inline const char *level_name(enum ax_log_level_t lvl)
     }
 }
 
-extern void ax_log(ax_log_info_t info)
+extern void ax_log(enum ax_log_level_t level, char *message)
 {
-    if (info.lvl != NONE)
-    {
-        fprintf(stderr, "%s%s%s", info.prefix,
-                level_name(info.lvl), info.message);
-    }
+    if (level != NONE)
+        fprintf(stderr, "%s%s", level_name(level), message);
 }

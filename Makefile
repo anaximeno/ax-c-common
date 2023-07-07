@@ -17,13 +17,13 @@ main: $(OBJS)
 test: test_memory test_result
 
 test_memory: $(TINYTEST_OBJ) $(OBJS) test_memory.o
-	@echo -n "Running for $@ -- "
+	@echo -n "Running $@ -- "
 	@$(CC) $(FLAGS) $^ -o $@
 	-@./$@
 	-@rm $@
 
 test_result: $(TINYTEST_OBJ) $(OBJS) test_result.o
-	@echo -n "Running for $@ -- "
+	@echo -n "Running $@ -- "
 	@$(CC) $(FLAGS) $^ -o $@
 	-@./$@
 	-@rm $@

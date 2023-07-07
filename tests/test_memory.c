@@ -57,17 +57,16 @@ void test_axreallocate_macro()
 void test_axmemdup_macro()
 {
     dummy *d1 = (dummy *)malloc(sizeof(dummy));
-    dummy *d2 = (dummy *)malloc(sizeof(dummy));
 
-    ASSERT("Couldn't allocate enough memory", d1 != NULL && d2 != NULL);
+    ASSERT("Couldn't allocate enough memory", d1 != NULL);
 
-    if (d1 != NULL && d2 != NULL)
+    if (d1 != NULL)
     {
         d1->age = 18;
         d1->name = "Jonny";
         d1->weight = 20.5;
 
-        d2 = axmemdup(d1, dummy);
+        dummy* d2 = axmemdup(d1, dummy);
 
         ASSERT_EQ(18, d1->age);
         ASSERT_STR_EQ("Jonny", d1->name);

@@ -6,6 +6,7 @@
 
 /** Allocates memory for the TYPE. */
 #define axlocate(type) (type *)malloc(sizeof(type))
+#define axreallocate(value, type, size) (type *)realloc(value, size)
 
 /** Returns a copy of the VALUE of its given TYPE*/
 #define axmemdup(value, type) ({            \

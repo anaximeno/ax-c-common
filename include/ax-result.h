@@ -57,7 +57,7 @@ ax_result_p ax_result_ok(void *value);
 ax_result_p ax_result_err(int errnum, char *message);
 
 /** Frees the memory of a RESULT pointer. */
-void *ax_free_result(ax_result_p result);
+void ax_free_result(ax_result_p* result);
 
 /** Returns the wrapped value in the ok RESULT of the type TYPE. */
 #define axunwrap_ok(result, type) axmemdup(result->to.ok.value, type)

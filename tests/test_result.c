@@ -38,7 +38,7 @@ void test_result_ok()
     ASSERT_NE(&d, &z);
     ASSERT_NE(d, z);
 
-    free(d);
+    ax_free_result(&result);
 
     /* z should still work */
     ASSERT_EQ(18, z->age);
@@ -55,7 +55,7 @@ void test_result_err()
     ASSERT_EQ(1, result->to.err.errnum);
     ASSERT_STR_EQ("Test error message", result->to.err.message);
 
-    result = ax_free_result(result);
+    ax_free_result(&result);
 }
 
 int main(int argc, char **argv)

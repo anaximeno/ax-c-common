@@ -30,14 +30,16 @@ extern ax_result_p ax_result_err(int errnum, char *message)
     return result;
 }
 
-extern void *ax_free_result(ax_result_p result)
+extern void ax_free_result(ax_result_p *result)
 {
-    if (result != NULL)
+    if (result != NULL && *result)
     {
-        if (result->type == OK && result->to.ok.value != NULL)
-            free(result->to.ok.value);
+        if ((*result)->type == OK && (*result)->to.ok.value != NULL)
+        {
+            free((*result)->to.ok.value);
+            (*result)->to.ok.value = NULL;
+        }
 
-        free(result);
+        free((*result));
     }
-    return NULL;
 }

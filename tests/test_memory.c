@@ -72,11 +72,15 @@ void test_axmemdup_macro()
         ASSERT_STR_EQ("Jonny", d1->name);
         ASSERT_EQ(20.5, d1->weight);
 
+        ASSERT_NE(&d1, &d2);
+        ASSERT_NE(d1, d2);
+
+        free(d1);
+
         ASSERT_EQ(18, d2->age);
         ASSERT_STR_EQ("Jonny", d2->name);
         ASSERT_EQ(20.5, d2->weight);
 
-        free(d1);
         free(d2);
     }
 }

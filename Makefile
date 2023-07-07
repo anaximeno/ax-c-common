@@ -12,6 +12,8 @@ TINYTEST_OBJ = tinytest.o
 TEST_SRCS = tests/test_memory.c tests/test_result.c
 TEST_OBJS = test_memory.o test_result.o
 
+main: $(OBJS)
+
 test: test_memory test_result
 
 test_memory: $(TINYTEST_OBJ) $(OBJS) test_memory.o

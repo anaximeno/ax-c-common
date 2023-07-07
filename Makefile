@@ -1,17 +1,28 @@
+.PHONY : test_memory test_result
+
 CC = gcc
 FLAGS = -Wall -fPIC -g
 
 SRCS = src/ax-log.c src/ax-result.c
 OBJS = ax-log.o ax-result.o
 
-TEST_SRCS = tests/tinytest/tinytest.c tests/test_memory.c
-TEST_OBJS = tinytest.o test_memory.o
+TINYTEST_SRC = tests/tinytest/tinytest.c
+TINYTEST_OBJ = tinytest.o
 
-test: test_memory
+TEST_SRCS = tests/test_memory.c tests/test_result.c
+TEST_OBJS = test_memory.o test_result.o
 
-test_memory: $(OBJS) $(TEST_OBJS)
-	$(CC) $(FLAGS) $^ -o $@
-	./$@ && rm $@
+test: test_memory test_result
+
+test_memory: $(TINYTEST_OBJ) $(OBJS) test_memory.o
+	@echo -n "Running for $@ -- "
+	@$(CC) $(FLAGS) $^ -o $@
+	@./$@ && rm $@
+
+test_result: $(TINYTEST_OBJ) $(OBJS) test_result.o
+	@echo -n "Running for $@ -- "
+	@$(CC) $(FLAGS) $^ -o $@
+	@./$@ && rm $@
 
 clean:
 	rm *.o
@@ -21,3 +32,6 @@ $(OBJS): $(SRCS)
 
 $(TEST_OBJS): $(TEST_SRCS)
 	$(CC) $(FLAGS) $^ -c
+
+$(TINYTEST_OBJ): $(TINYTEST_SRC)
+	@$(CC) $(FLAGS) $^ -c

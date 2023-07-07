@@ -9,7 +9,7 @@ typedef struct dummy
 {
     char *name;
     unsigned age;
-    float weight;
+    double weight;
 } dummy;
 
 void test_axlocate_macro()
@@ -18,15 +18,17 @@ void test_axlocate_macro()
 
     ASSERT("Couldn't allocate enough memory", d != NULL);
 
-    if (d == NULL)
+    if (d != NULL)
     {
         d->age = 18;
         d->name = "Jonny";
-        d->weight = 20.02;
+        d->weight = 20.5;
 
         ASSERT_EQ(18, d->age);
         ASSERT_STR_EQ("Jonny", d->name);
-        ASSERT_EQ(20.02, d->weight);
+        ASSERT_EQ(20.5, d->weight);
+
+        free(d);
     }
 }
 
@@ -36,17 +38,19 @@ void test_axreallocate_macro()
 
     ASSERT("Couldn't allocate enough memory", d != NULL);
 
-    if (d == NULL)
+    if (d != NULL)
     {
         d->age = 18;
         d->name = "Jonny";
-        d->weight = 20.02;
+        d->weight = 20.5;
 
         d = axreallocate(d, dummy, sizeof(dummy));
 
         ASSERT_EQ(18, d->age);
         ASSERT_STR_EQ("Jonny", d->name);
-        ASSERT_EQ(20.02, d->weight);
+        ASSERT_EQ(20.5, d->weight);
+
+        free(d);
     }
 }
 
@@ -57,21 +61,24 @@ void test_axmemdup_macro()
 
     ASSERT("Couldn't allocate enough memory", d1 != NULL && d2 != NULL);
 
-    if (d1 == NULL)
+    if (d1 != NULL && d2 != NULL)
     {
         d1->age = 18;
         d1->name = "Jonny";
-        d1->weight = 20.02;
+        d1->weight = 20.5;
 
         d2 = axmemdup(d1, dummy);
 
         ASSERT_EQ(18, d1->age);
         ASSERT_STR_EQ("Jonny", d1->name);
-        ASSERT_EQ(20.02, d1->weight);
+        ASSERT_EQ(20.5, d1->weight);
 
         ASSERT_EQ(18, d2->age);
         ASSERT_STR_EQ("Jonny", d2->name);
-        ASSERT_EQ(20.02, d2->weight);
+        ASSERT_EQ(20.5, d2->weight);
+
+        free(d1);
+        free(d2);
     }
 }
 

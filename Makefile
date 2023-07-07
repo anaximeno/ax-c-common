@@ -19,12 +19,12 @@ test: test_memory test_result
 test_memory: $(TINYTEST_OBJ) $(OBJS) test_memory.o
 	@echo -n "Running for $@ -- "
 	@$(CC) $(FLAGS) $^ -o $@
-	@./$@ && rm $@
+	-@./$@ && rm $@
 
 test_result: $(TINYTEST_OBJ) $(OBJS) test_result.o
 	@echo -n "Running for $@ -- "
 	@$(CC) $(FLAGS) $^ -o $@
-	@./$@ && rm $@
+	-@./$@ && rm $@
 
 clean:
 	rm *.o

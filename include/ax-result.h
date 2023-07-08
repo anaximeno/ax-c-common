@@ -62,4 +62,8 @@ void ax_free_result(ax_result_p* result);
 /** Returns the wrapped value in the ok RESULT of the type TYPE. */
 #define axunwrap_ok(result, type) axmemdup(result->to.ok.value, type)
 
+/** Define a result for the given type. This is just a marker of the
+expected result type. */
+#define ax_result(type) ax_result_p
+
 #endif

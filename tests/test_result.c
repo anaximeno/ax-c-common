@@ -4,7 +4,7 @@
 
 #include "tinytest/tinytest.h"
 
-#include "../include/ax-c-common.h"
+#include "../ax-c-common.h"
 
 typedef struct dummy
 {

@@ -13,18 +13,28 @@ typedef struct dummy
     double weight;
 } dummy;
 
-void test_result_ok()
+ax_result(dummy) create_dummy(unsigned age, char* name, double weight)
 {
     dummy *d = axlocate(dummy);
 
-    d->age = 18;
-    d->name = "Jonny";
-    d->weight = 20.5;
+    if (d != NULL) {
+        d->age = age;
+        d->name = name;
+        d->weight = weight;
 
-    ax_result_p result = ax_result_ok(d);
+        return ax_result_ok(d);
+    }
+
+    return ax_result_err(1, "Error");
+}
+
+void test_result_ok()
+{
+    ax_result_p result = create_dummy(18, "Jonny", 20.5);
 
     ASSERT_EQ(OK, result->type);
 
+    dummy *d = (dummy *)result->to.ok.value;
     dummy *z = axunwrap_ok(result, dummy);
 
     ASSERT_EQ(18, d->age);
@@ -45,13 +55,14 @@ void test_result_ok()
     ASSERT_STR_EQ("Jonny", z->name);
     ASSERT_EQ(20.5, z->weight);
 
-    free(z);
+    axfree(z);
 }
 
 void test_result_err()
 {
     ax_result_p result = ax_result_err(1, "Test error message");
 
+    ASSERT_EQ(ERR, result->type);
     ASSERT_EQ(1, result->to.err.errnum);
     ASSERT_STR_EQ("Test error message", result->to.err.message);
 

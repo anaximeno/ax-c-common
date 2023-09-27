@@ -40,11 +40,11 @@
 #define axfree(value) ({ free(value); value = NULL; })
 
 /** Returns a copy of the VALUE of its given TYPE*/
-#define axmemdup(value, type) ({            \
-    type *_tmp_ = axlocate(type);           \
-    if (_tmp_ != NULL)                      \
-        memcpy(_tmp_, value, sizeof(type)); \
-    _tmp_;                                  \
+#define axmemdup(value, type) ({              \
+    type *__tmp__ = axlocate(type);           \
+    if (__tmp__ != NULL)                      \
+        memcpy(__tmp__, value, sizeof(type)); \
+    __tmp__;                                  \
 })
 
 #endif

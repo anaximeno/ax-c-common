@@ -46,6 +46,9 @@ void test_result_ok()
     ASSERT_EQ(20.5, z->weight);
 
     ASSERT_NE(&d, &z);
+    ASSERT_EQ(z->age, d->age);
+    ASSERT_STR_EQ(z->name, d->name);
+    ASSERT_EQ(z->weight, d->weight);
     ASSERT_NE(d, z);
 
     ax_free_result(&result);

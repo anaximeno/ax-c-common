@@ -6,7 +6,7 @@
 
 extern ax_result_p ax_result_ok(void *value)
 {
-    ax_result_p result = (ax_result_p)malloc(sizeof(ax_result_t));
+    ax_result_p result = axlocate(ax_result_t);
 
     if (result != NULL)
     {
@@ -19,7 +19,7 @@ extern ax_result_p ax_result_ok(void *value)
 
 extern ax_result_p ax_result_err(int errnum, char *message)
 {
-    ax_result_p result = (ax_result_p)malloc(sizeof(ax_result_t));
+    ax_result_p result = axlocate(ax_result_t);
 
     if (result != NULL)
     {

@@ -41,6 +41,9 @@ enum ax_log_level_t
 };
 
 /** Prints a log message to stderr. */
-void ax_log(enum ax_log_level_t, char *message);
+void ax_log(enum ax_log_level_t, const char *message);
+
+/** Prints a named log message to stderr. */
+void ax_named_log(const char* name, enum ax_log_level_t, const char* message);
 
 #endif

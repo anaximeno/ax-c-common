@@ -28,23 +28,25 @@
 #include <string.h>
 
 /** Allocates memory for the given TYPE. */
-#define axlocate(type) (type *)malloc(sizeof(type))
+#define ax_alloc(type) (type *)malloc(sizeof(type))
 
 /** Used to reallocate memory from VALUE of the given TYPE to a given SIZE. */
-#define axreallocate(value, type, size) (type *)realloc(value, size)
+#define ax_ralloc(value, type, size) (type *)realloc(value, size)
 
 /** Used to allocate a sequential block of values of a given LENGTH for a given TYPE. */
-#define axcallocate(length, type) (type *)calloc(length, sizeof(type))
+#define ax_calloc(length, type) (type *)calloc(length, sizeof(type))
 
 /** Frees the VALUE of a given variable then sets it to NULL. */
-#define axfree(value) ({ free(value); value = NULL; })
+#define ax_free(value) ({ free(value); value = NULL; })
 
 /** Returns a copy of the VALUE of its given TYPE*/
-#define axmemdup(value, type) ({              \
-    type *__tmp__ = axlocate(type);           \
-    if (__tmp__ != NULL)                      \
-        memcpy(__tmp__, value, sizeof(type)); \
-    __tmp__;                                  \
+#define ax_mdup(value, type) ({         \
+    type *tmp = ax_alloc(type);           \
+                                          \
+    if (tmp != NULL)                      \
+        memcpy(tmp, value, sizeof(type)); \
+                                          \
+    tmp;                                  \
 })
 
 #endif

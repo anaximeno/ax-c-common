@@ -3,37 +3,37 @@
 
 #include "../include/ax-log.h"
 
-static inline const char *level_name(enum ax_log_level_t lvl)
+static inline const char *log_text(enum ax_log_t type)
 {
-    switch (lvl)
+    switch (type)
     {
-    case INFO:
+    case AX_LOG_INFO:
         return "info";
 
-    case WARN:
+    case AX_LOG_WARN:
         return "warning";
 
-    case ERROR:
+    case AX_LOG_ERROR:
         return "error";
 
-    case NONE:
+    case AX_LOG_NONE:
     default:
         return "";
     }
 }
 
-extern void ax_log(enum ax_log_level_t level, const char *message)
+extern void ax_log(enum ax_log_t type, const char *message)
 {
-    ax_named_log(NULL, level, message);
+    ax_nlog(NULL, type, message);
 }
 
-void ax_named_log(const char* name, enum ax_log_level_t level, const char* message)
+extern void ax_nlog(const char *name, enum ax_log_t type, const char *message)
 {
     if (name != NULL)
         fprintf(stderr, "%s: ", name);
 
-    if (level != NONE)
-        fprintf(stderr, "%s: ", level_name(level));
+    if (type != AX_LOG_NONE)
+        fprintf(stderr, "%s: ", log_text(type));
 
     if (message != NULL)
         fprintf(stderr, "%s\n", message);

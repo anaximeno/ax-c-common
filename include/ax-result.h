@@ -28,8 +28,8 @@
 
 enum ax_result_enum_t
 {
-    OK,
-    ERR
+    AX_RESULT_OK,
+    AX_RESULT_ERR
 };
 
 struct ax_result_ok_t
@@ -71,22 +71,21 @@ typedef struct ax_result_t ax_result_t;
 /** Pointer representation of the result type,
  * can be `ok` or `err`.
  */
-typedef struct ax_result_t *ax_result_p;
 
 /** Creates a result of type ok. */
-ax_result_p ax_result_ok(void *value);
+ax_result_t *ax_result_ok(void *value);
 
 /** Creates a result of type result. */
-ax_result_p ax_result_err(int errnum, char *message);
+ax_result_t *ax_result_err(int errnum, char *message);
 
 /** Frees the memory of a RESULT pointer. */
-void ax_free_result(ax_result_p* result);
+void ax_free_result(ax_result_t **result);
 
 /** Returns the wrapped value in the ok RESULT of the type TYPE. */
-#define axunwrap_ok(result, type) axmemdup(result->to.ok.value, type)
+#define ax_unwrap_ok(result, type) ax_mdup(result->to.ok.value, type)
 
 /** Define a result for the given type. This is just a marker of the
 expected result type. */
-#define ax_result(type) ax_result_p
+#define __ax_result__(type) ax_result_t *
 
 #endif

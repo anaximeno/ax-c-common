@@ -13,11 +13,12 @@ typedef struct dummy
     double weight;
 } dummy;
 
-ax_result(dummy) create_dummy(unsigned age, char* name, double weight)
+__ax_result__(dummy) create_dummy(unsigned age, char *name, double weight)
 {
-    dummy *d = axlocate(dummy);
+    dummy *d = ax_alloc(dummy);
 
-    if (d != NULL) {
+    if (d != NULL)
+    {
         d->age = age;
         d->name = name;
         d->weight = weight;
@@ -30,12 +31,12 @@ ax_result(dummy) create_dummy(unsigned age, char* name, double weight)
 
 void test_result_ok()
 {
-    ax_result_p result = create_dummy(18, "Jonny", 20.5);
+    ax_result_t* result = create_dummy(18, "Jonny", 20.5);
 
-    ASSERT_EQ(OK, result->type);
+    ASSERT_EQ(AX_RESULT_OK, result->type);
 
     dummy *d = (dummy *)result->to.ok.value;
-    dummy *z = axunwrap_ok(result, dummy);
+    dummy *z = ax_unwrap_ok(result, dummy);
 
     ASSERT_EQ(18, d->age);
     ASSERT_STR_EQ("Jonny", d->name);
@@ -58,14 +59,14 @@ void test_result_ok()
     ASSERT_STR_EQ("Jonny", z->name);
     ASSERT_EQ(20.5, z->weight);
 
-    axfree(z);
+    ax_free(z);
 }
 
 void test_result_err()
 {
-    ax_result_p result = ax_result_err(1, "Test error message");
+    ax_result_t *result = ax_result_err(1, "Test error message");
 
-    ASSERT_EQ(ERR, result->type);
+    ASSERT_EQ(AX_RESULT_ERR, result->type);
     ASSERT_EQ(1, result->to.err.errnum);
     ASSERT_STR_EQ("Test error message", result->to.err.message);
 

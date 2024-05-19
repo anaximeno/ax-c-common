@@ -12,9 +12,9 @@ typedef struct dummy
     double weight;
 } dummy;
 
-void test_axlocate_macro()
+void test_axalloc_macro()
 {
-    dummy *d = axlocate(dummy);
+    dummy *d = ax_alloc(dummy);
 
     ASSERT("Couldn't allocate enough memory", d != NULL);
 
@@ -28,11 +28,11 @@ void test_axlocate_macro()
         ASSERT_STR_EQ("Jonny", d->name);
         ASSERT_EQ(20.5, d->weight);
 
-        axfree(d);
+        ax_free(d);
     }
 }
 
-void test_axreallocate_macro()
+void test_axralloc_macro()
 {
     dummy *d = (dummy *)malloc(sizeof(dummy));
 
@@ -44,17 +44,17 @@ void test_axreallocate_macro()
         d->name = "Jonny";
         d->weight = 20.5;
 
-        d = axreallocate(d, dummy, sizeof(dummy));
+        d = ax_ralloc(d, dummy, sizeof(dummy));
 
         ASSERT_EQ(18, d->age);
         ASSERT_STR_EQ("Jonny", d->name);
         ASSERT_EQ(20.5, d->weight);
 
-        axfree(d);
+        ax_free(d);
     }
 }
 
-void test_axmemdup_macro()
+void test_axmdup_macro()
 {
     dummy *d1 = (dummy *)malloc(sizeof(dummy));
 
@@ -66,7 +66,7 @@ void test_axmemdup_macro()
         d1->name = "Jonny";
         d1->weight = 20.5;
 
-        dummy* d2 = axmemdup(d1, dummy);
+        dummy *d2 = ax_mdup(d1, dummy);
 
         ASSERT_EQ(18, d1->age);
         ASSERT_STR_EQ("Jonny", d1->name);
@@ -75,20 +75,20 @@ void test_axmemdup_macro()
         ASSERT_NE(&d1, &d2);
         ASSERT_NE(d1, d2);
 
-        axfree(d1);
+        ax_free(d1);
 
         ASSERT_EQ(18, d2->age);
         ASSERT_STR_EQ("Jonny", d2->name);
         ASSERT_EQ(20.5, d2->weight);
 
-        axfree(d2);
+        ax_free(d2);
     }
 }
 
 int main(int argc, char **argv)
 {
-    RUN(test_axlocate_macro);
-    RUN(test_axreallocate_macro);
-    RUN(test_axmemdup_macro);
+    RUN(test_axalloc_macro);
+    RUN(test_axralloc_macro);
+    RUN(test_axmdup_macro);
     return TEST_REPORT();
 }

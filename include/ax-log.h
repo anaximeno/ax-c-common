@@ -27,23 +27,23 @@
 #define AX_DEBUG_ACTIVE 0
 
 /** The level of the log, can be:
- * - NONE: won't be printed to the terminal,
- * - INFO: will be printed with aa info notice,
- * - WARN: will be printed with an warning notice,
- * - ERROR: will be printed with an error notice
+ * - `AX_LOG_LEVEL_NONE`: won't be printed to the terminal,
+ * - `AX_LOG_LEVEL_INFO`: will be printed with aa info notice,
+ * - `AX_LOG_LEVEL_WARN`: will be printed with an warning notice,
+ * - `AX_LOG_LEVEL_ERROR`: will be printed with an error notice
  */
-enum ax_log_level_t
+enum ax_log_t
 {
-    NONE,
-    INFO,
-    WARN,
-    ERROR,
+    AX_LOG_NONE,
+    AX_LOG_INFO,
+    AX_LOG_WARN,
+    AX_LOG_ERROR,
 };
 
 /** Prints a log message to stderr. */
-void ax_log(enum ax_log_level_t, const char *message);
+void ax_log(enum ax_log_t, const char *message);
 
 /** Prints a named log message to stderr. */
-void ax_named_log(const char* name, enum ax_log_level_t, const char* message);
+void ax_nlog(const char *name, enum ax_log_t, const char *message);
 
 #endif

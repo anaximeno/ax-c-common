@@ -69,10 +69,6 @@ struct ax_result_t
  */
 typedef struct ax_result_t ax_result_t;
 
-/** Pointer representation of the result type,
- * can be `ok` or `err`.
- */
-
 /** Creates a result of type ok. */
 ax_result_t *ax_result_ok(void *value);
 

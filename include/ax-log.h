@@ -28,10 +28,10 @@
 #define AX_DEBUG_ACTIVE 0
 
 /** The level of the log, can be:
- * - `AX_LOG_LEVEL_NONE`: won't be printed to the terminal,
- * - `AX_LOG_LEVEL_INFO`: will be printed with aa info notice,
- * - `AX_LOG_LEVEL_WARN`: will be printed with an warning notice,
- * - `AX_LOG_LEVEL_ERROR`: will be printed with an error notice
+ * - `AX_LOG_NONE`: won't be printed to the terminal,
+ * - `AX_LOG_INFO`: will be printed with aa info notice,
+ * - `AX_LOG_WARN`: will be printed with an warning notice,
+ * - `AX_LOG_ERROR`: will be printed with an error notice
  */
 enum ax_log_t
 {

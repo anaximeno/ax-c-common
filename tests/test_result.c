@@ -31,7 +31,7 @@ __ax_result__(dummy) create_dummy(unsigned age, char *name, double weight)
 
 void test_result_ok()
 {
-    ax_result_t* result = create_dummy(18, "Jonny", 20.5);
+    ax_result_t *result = create_dummy(18, "Jonny", 20.5);
 
     ASSERT_EQ(AX_RESULT_OK, result->type);
 
